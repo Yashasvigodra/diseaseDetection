@@ -488,9 +488,14 @@ st.markdown("---")
 
 # Disease recognition
 st.header(translations[lang]['disease_recognition'])
+# File upload or camera input
 img_file = st.file_uploader(translations[lang]['choose_image'], type=['jpg','jpeg','png'])
-if img_file:
-    st.image(img_file, caption='Uploaded Image', use_column_width=True)
+camera_img = st.camera_input("Or take a photo using your camera")
+
+# Preview image
+image_to_use = img_file if img_file else camera_img
+if image_to_use:
+    st.image(image_to_use, caption='Selected Image', use_column_width=True)
 
 if st.button(translations[lang]['predict_btn']):
     if not img_file:
